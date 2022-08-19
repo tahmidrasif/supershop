@@ -7,6 +7,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSortModule
   ],
   exports:[
     MatListModule,
@@ -25,7 +27,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }

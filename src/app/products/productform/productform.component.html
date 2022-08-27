@@ -1,0 +1,51 @@
+<form class="example-form" [formGroup]="prodcutFrom" (ngSubmit)="onSubmit()">
+<h2 mat-dialog-title>Product From</h2>
+<mat-dialog-content class="mat-typography">
+
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <mat-card class="mat-error" *ngIf="isError" >{{errorMessage}}<br></mat-card>
+  <mat-card class="mat-success" *ngIf="isSuccess" >{{successMessage}}<br></mat-card>
+  
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="Name">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Product Code</mat-label>
+      <input matInput formControlName="ProductCode">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="Description">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="CategoryId">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Sub Category</mat-label>
+      <input matInput formControlName="SubCategoryId">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Unit</mat-label>
+      <input matInput formControlName="UnitId">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Unit Type</mat-label>
+      <input matInput formControlName="UnitType">
+    </mat-form-field>
+    <br>
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button  cdkFocusInitial [disabled]="prodcutFrom.invalid">Save</button>
+</mat-dialog-actions>
+</form>

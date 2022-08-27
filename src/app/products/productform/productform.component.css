@@ -1,0 +1,7 @@
+.mat-error{
+    background-color: gold !important;
+  }
+
+  .mat-success{
+    background-color: palegreen !important;
+  }

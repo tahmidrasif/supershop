@@ -4,6 +4,8 @@ import { ProductService } from 'src/services/product.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort,Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+import { ProductformComponent } from '../productform/productform.component';
 
 @Component({
   selector: 'app-productlist',
@@ -25,7 +27,7 @@ export class ProductlistComponent implements OnInit {
   
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
-  constructor(private _prodctservice:ProductService) { }
+  constructor(private _prodctservice:ProductService,public dialog: MatDialog) { }
   
   ngOnInit(): void {
     
@@ -45,7 +47,7 @@ export class ProductlistComponent implements OnInit {
   }
  
   edit(element:IProduct){
-    console.log(element)
+    this.openDialog(element);
   }
 
   delete(element:IProduct){
@@ -57,6 +59,21 @@ export class ProductlistComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.loadData();
+  }
+
+  openDialog(data){
+
+      const dialogRef = this.dialog.open(ProductformComponent, { disableClose: true, height: '90%',
+      width: '90%', data: data
+     });
+  
+      dialogRef.afterClosed().subscribe(
+          data => {
+            this.loadData();
+          }
+      );    
+    
+    
   }
 
 }

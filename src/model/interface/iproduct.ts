@@ -1,13 +1,10 @@
 export interface IProduct {
 
-        productId:number,
-        productName:string,
-        productCode:string,
-        unitId:number,
-        unitName:string,
-        categoryId:number,
-        categoryName:string,
-        subcategoryId:number,
-        subcategoryName:string
-
+        Name:string,
+        ProductCode:string,
+        Description:string,
+        UnitId:number,
+        CategoryId:number,
+        SubCategoryId:number,
+        UnitType:string
 }

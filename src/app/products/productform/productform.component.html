@@ -3,8 +3,6 @@
 <mat-dialog-content class="mat-typography">
 
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-  <mat-card class="mat-error" *ngIf="isError" >{{errorMessage}}<br></mat-card>
-  <mat-card class="mat-success" *ngIf="isSuccess" >{{successMessage}}<br></mat-card>
   
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Name</mat-label>
@@ -46,6 +44,6 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button  cdkFocusInitial [disabled]="prodcutFrom.invalid">Save</button>
+  <button mat-button  cdkFocusInitial [disabled]="prodcutFrom.invalid && !isSuccess">Save</button>
 </mat-dialog-actions>
 </form>

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { isObservable } from 'rxjs';
 import { Product } from 'src/model/classes/product';
 import { ProductService } from 'src/services/product.service';
@@ -20,8 +20,6 @@ export class ProductformComponent implements OnInit {
   prodcutFrom:FormGroup;
   isError=false;
   isLoading=false;
-  errorMessage='';
-  successMessage='';
   isSuccess=false;
   constructor(public formBuilder:FormBuilder, public dialog: MatDialog,private dialogRef: MatDialogRef<ProductformComponent>,private _snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any ,private _service:ProductService) { 
     console.log(data);
@@ -56,7 +54,8 @@ export class ProductformComponent implements OnInit {
      if(this.data!=null){
       this.prodcutFrom.patchValue(this.data);
      }
-
+    console.log(this.isSuccess)
+    console.log(this.prodcutFrom.invalid)
   }
 
   onSubmit(){
@@ -64,23 +63,17 @@ export class ProductformComponent implements OnInit {
     
     if (this.prodcutFrom.valid)
     {
-      // var target=Object.assign(new Product(), this.prodcutFrom.value)
-      // console.log(target)
+
       this.isLoading=true;
       this._service.insertProduct(this.prodcutFrom.value).subscribe({
         next: (v) => {
-          console.log("In Success")
-          console.log(v)
+          this.openSnackBar("Successfully Inserted");
           this.isSuccess=true;
-          this.successMessage="Successfully Inserted";
 
         },
         error: (e) => {
-          console.log("In error")
-          console.log(e.error.responseMessage)
-          this.isError=true;
-          this.errorMessage=e.error.responseMessage;
-
+          this.openSnackBar(e.error.responseMessage);
+         
         },
         complete: () => {
           console.log('in compleate')
@@ -88,7 +81,6 @@ export class ProductformComponent implements OnInit {
         }
       })
       .add(() => {
-          console.log("Will be executed on both success or error of the previous subscription")
           this.isLoading=false;
        });
     }
@@ -102,6 +94,10 @@ export class ProductformComponent implements OnInit {
     // }
   }
 
-  
+  openSnackBar(message: string) {
+    let config = new MatSnackBarConfig();
+    config.duration = 5000;
+    this._snackBar.open(message, 'close',config);
+  }
 
 }
